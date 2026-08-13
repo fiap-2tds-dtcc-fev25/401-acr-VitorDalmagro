@@ -1,6 +1,6 @@
 REGISTRY=2tdsarm566052
 RG_NAME=rg-rm566052-aci
-LOCATION=eastus
+LOCATION=mexicocentral
 
 az group create --name $RG_NAME --location $LOCATION
 
@@ -23,5 +23,10 @@ az container create \
     --ports 8080 \
     --registry-username $ACR_USERNAME \
     --registry-password $ACR_PASSWORD \
+    --environment-variables \
+      SPRING_DATASOURCE_URL="jdbc:postgresql://db:5432/recipes" \
+    --secure-environment-variables \
+      SPRING_DATASOURCE_USERNAME="postgresql" \
+      SPRING_DATASOURCE_PASSWORD="postgresql" \
     --os-type Linux \
     --ip-address Public
